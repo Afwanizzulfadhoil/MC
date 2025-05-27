@@ -1,13 +1,10 @@
 const express = require('express');
-const path = require('path'); // perbaiki typo di sini
+const path = require('path');
 const { status, statusBedrock } = require('minecraft-server-util');
 const app = express();
 const PORT = 3000;
 
-// Ganti IP publik kamu di sini
-const publicIP = '36.78.116.84'; // ganti ini
-// const localIP = '192.168.1.31'; // ganti ini
-// Middleware untuk parsing JSON dan mengirim file statis
+const publicIP = '36.78.116.84';
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -33,7 +30,19 @@ app.get('/status/bedrock', async (req, res) => {
     }
 });
 
-// Listen on all network interfaces so it can be accessed locally and remotely
+
+// Testing
+app.get('/status', async (req, res) => {
+    let status = {};
+
+    try {
+        const result = await status(publicIP, 25565, { timeout: 500 });
+        res.json(result);
+    } catch (error) {
+        res.json({ online: false });
+    }
+})
+
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Status checker running at http://localhost:${PORT}`);
 });
