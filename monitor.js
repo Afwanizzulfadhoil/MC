@@ -17,14 +17,13 @@ app.get('/status', async (req, res) => {
     let response = {
         server_name: "",
         max_player: 0,
+        player_online: 0,
         java: {
             online: false,
-            players: 0,
             version: ""
         },
         bedrock: {
             online: false,
-            players: 0,
             version: ""
         },
     };
@@ -32,7 +31,6 @@ app.get('/status', async (req, res) => {
     try {
         const resultJava = await status(publicIP, 25565, { timeout: 500 });
         response.java.online = true;
-        response.java.players = resultJava.players.online;
         response.java.version = resultJava.version.name.split(" ")[1];
         response.max_player = resultJava.players.max;
         response.server_name = resultJava.motd.clean;

@@ -32,8 +32,37 @@
             <p id="bedrock-status" class="mt-2 text-lg">Mengecek...</p>
         </div>
     </div>
-
+    <audio id="myAudio" src="/assets/audio/cda1-126370.mp3" preload="auto" autoplay></audio>
     <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("myAudio");
+            audio.volume = 0.1; // Volume 10%
+
+            audio.play().then(() => {
+                console.log("Lagu diputar otomatis.");
+            }).catch((err) => {
+                console.log("Autoplay diblokir. Menunggu interaksi pengguna.");
+
+                // Tampilkan tombol jika autoplay gagal
+                const btn = document.createElement("button");
+                btn.textContent = "Mainkan Musik";
+                btn.style.position = "fixed";
+                btn.style.top = "20px";
+                btn.style.left = "20px";
+                btn.style.zIndex = "9999";
+                btn.style.padding = "10px 20px";
+                btn.style.fontSize = "16px";
+                btn.style.cursor = "pointer";
+
+                btn.addEventListener("click", () => {
+                    audio.play();
+                    btn.remove(); // Hapus tombol setelah diklik
+                });
+
+                document.body.appendChild(btn);
+            });
+        });
+
         function updateStatus() {
             fetch('/status')
                 .then(res => res.json())
@@ -49,16 +78,7 @@
                         : '<span class="text-red-400">❌ OFFLINE</span>';
                 });
         }
-
-        function playSong() {
-            const audio = new Audio('path/to/your/song.mp3'); // Ganti dengan URL atau path file lagu Anda
-            audio.volume = 0.1; // Atur volume rendah
-            audio.loop = true;  // Mainkan terus menerus
-            audio.play().catch(error => {
-            console.error('Error saat memulai lagu:', error);
-            });
-        }
-
+        
         updateStatus();
         setInterval(updateStatus, 5000);
     </script>
