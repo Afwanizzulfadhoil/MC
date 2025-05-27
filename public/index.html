@@ -32,37 +32,8 @@
             <p id="bedrock-status" class="mt-2 text-lg">Mengecek...</p>
         </div>
     </div>
-    <audio id="myAudio" src="/assets/audio/cda1-126370.mp3" preload="auto" autoplay></audio>
+    <audio src="/assets/audio/lagu.mp3" preload="auto" autoplay></audio>
     <script>
-        window.addEventListener("DOMContentLoaded", function () {
-            const audio = document.getElementById("myAudio");
-            audio.volume = 0.1; // Volume 10%
-
-            audio.play().then(() => {
-                console.log("Lagu diputar otomatis.");
-            }).catch((err) => {
-                console.log("Autoplay diblokir. Menunggu interaksi pengguna.");
-
-                // Tampilkan tombol jika autoplay gagal
-                const btn = document.createElement("button");
-                btn.textContent = "Mainkan Musik";
-                btn.style.position = "fixed";
-                btn.style.top = "20px";
-                btn.style.left = "20px";
-                btn.style.zIndex = "9999";
-                btn.style.padding = "10px 20px";
-                btn.style.fontSize = "16px";
-                btn.style.cursor = "pointer";
-
-                btn.addEventListener("click", () => {
-                    audio.play();
-                    btn.remove(); // Hapus tombol setelah diklik
-                });
-
-                document.body.appendChild(btn);
-            });
-        });
-
         function updateStatus() {
             fetch('/status')
                 .then(res => res.json())
@@ -70,7 +41,7 @@
                     document.getElementById('java-status').innerHTML = data.java.online
                         ? '<span class="text-green-400">✅ ONLINE</span>'
                         : '<span class="text-red-400">❌ OFFLINE</span>';
-                    document.getElementById('java-player').textContent = data.java.online ? data.java.players : '0';
+                    document.getElementById('java-player').textContent = data.java.online ? data.player_online : '0';
                     document.getElementById('java-max').textContent = data.java.online ? data.max_player : '0';
 
                     document.getElementById('bedrock-status').innerHTML = data.bedrock.online
