@@ -26,7 +26,6 @@
         <div class="p-4 bg-gray-700 rounded-xl transform transition duration-300 hover:scale-105 hover:bg-gray-600">
             <h2 class="text-lg font-semibold text-blue-400">Bedrock Edition :<code>19132</code></h2>
             <p id="bedrock-status" class="mt-2 text-lg">Mengecek...</p>
-            <!-- <p class="text-sm mt-1 text-gray-400">👥 Pemain: <span id="bedrock-player">-</span></p> -->
         </div>
     </div>
 
@@ -47,7 +46,6 @@
                     document.getElementById('bedrock-status').innerHTML = data.online
                         ? '<span class="text-green-400">✅ ONLINE</span>'
                         : '<span class="text-red-400">❌ OFFLINE</span>';
-                    document.getElementById('bedrock-player').textContent = data.online ? data.players : '0';
                 });
         }
 
