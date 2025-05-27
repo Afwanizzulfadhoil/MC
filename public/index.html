@@ -15,7 +15,7 @@
         <p class="text-center text-gray-300">Memantau status server Java & Bedrock Edition secara real-time.</p>
         <h3 class="text-center font-bold font-sans">IP : <code>36.78.116.84</code></h3>
         <div class="text-center">
-            <p class="text-xl">👥 Pemain: <span id="java-player" class="font-bold text-white">-</span></p>
+            <p class="text-xl">👥 Pemain: <span id="java-player" class="font-bold text-white">-</span> / <span id="java-max" class="font-bold text-white">-</span></p>
         </div>
 
         <div class="p-4 bg-gray-700 rounded-xl transform transition duration-300 hover:scale-105 hover:bg-gray-600">
@@ -31,19 +31,16 @@
 
     <script>
         function updateStatus() {
-            fetch('/status/java')
+            fetch('/status')
                 .then(res => res.json())
                 .then(data => {
-                    document.getElementById('java-status').innerHTML = data.online
+                    document.getElementById('java-status').innerHTML = data.java.online
                         ? '<span class="text-green-400">✅ ONLINE</span>'
                         : '<span class="text-red-400">❌ OFFLINE</span>';
-                    document.getElementById('java-player').textContent = data.online ? data.players : '0';
-                });
+                    document.getElementById('java-player').textContent = data.java.online ? data.java.players : '0';
+                    document.getElementById('java-max').textContent = data.java.online ? data.max_player : '0';
 
-            fetch('/status/bedrock')
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('bedrock-status').innerHTML = data.online
+                    document.getElementById('bedrock-status').innerHTML = data.bedrock.online
                         ? '<span class="text-green-400">✅ ONLINE</span>'
                         : '<span class="text-red-400">❌ OFFLINE</span>';
                 });
