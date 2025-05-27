@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status Server Minecraft</title>
+    <link rel="icon" href="/assets/image/siapa_sangkajpg_MsP_2.ico">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-900 text-white font-sans min-h-screen flex items-center justify-center p-6">
+    <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-xl space-y-6">
+        <h1 class="text-3xl font-bold text-center text-green-400">🌍 Status Server Minecraft</h1>
+        <p class="text-center text-gray-300">Memantau status server Java & Bedrock Edition secara real-time.</p>
+
+        <div class="text-center">
+            <p class="text-xl">👥 Pemain: <span id="java-player" class="font-bold text-white">-</span></p>
+        </div>
+
+        <div class="p-4 bg-gray-700 rounded-xl transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+            <h2 class="text-lg font-semibold text-yellow-400">Java Edition</h2>
+            <p id="java-status" class="mt-2 text-lg">Mengecek...</p>
+        </div>
+
+        <div class="p-4 bg-gray-700 rounded-xl transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+            <h2 class="text-lg font-semibold text-blue-400">Bedrock Edition</h2>
+            <p id="bedrock-status" class="mt-2 text-lg">Mengecek...</p>
+            <!-- <p class="text-sm mt-1 text-gray-400">👥 Pemain: <span id="bedrock-player">-</span></p> -->
+        </div>
+    </div>
+
+    <script>
+        function updateStatus() {
+            fetch('/status/java')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('java-status').innerHTML = data.online
+                        ? '<span class="text-green-400">✅ ONLINE</span>'
+                        : '<span class="text-red-400">❌ OFFLINE</span>';
+                    document.getElementById('java-player').textContent = data.online ? data.players : '0';
+                });
+
+            fetch('/status/bedrock')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('bedrock-status').innerHTML = data.online
+                        ? '<span class="text-green-400">✅ ONLINE</span>'
+                        : '<span class="text-red-400">❌ OFFLINE</span>';
+                    document.getElementById('bedrock-player').textContent = data.online ? data.players : '0';
+                });
+        }
+
+        updateStatus();
+        setInterval(updateStatus, 5000);
+    </script>
+</body>
+
+</html>
