@@ -17,7 +17,7 @@
             <span class="text-blue-300">SMP</span>
             <span> SERVER</span>
         </h1>
-        <h3 class="text-center font-bold font-sans">IP : <code>36.78.116.84</code></h3>
+        <h3 class="text-center font-bold font-sans"><code>mutusmp-regen.servegame.com</code></h3>
         <div class="text-center">
             <p class="text-xl">👥 Pemain: <span id="java-player" class="font-bold text-white">-</span> / <span id="java-max" class="font-bold text-white">-</span></p>
         </div>
@@ -48,6 +48,15 @@
                         ? '<span class="text-green-400">✅ ONLINE</span>'
                         : '<span class="text-red-400">❌ OFFLINE</span>';
                 });
+        }
+
+        function playSong() {
+            const audio = new Audio('path/to/your/song.mp3'); // Ganti dengan URL atau path file lagu Anda
+            audio.volume = 0.1; // Atur volume rendah
+            audio.loop = true;  // Mainkan terus menerus
+            audio.play().catch(error => {
+            console.error('Error saat memulai lagu:', error);
+            });
         }
 
         updateStatus();
