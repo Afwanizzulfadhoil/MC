@@ -8,10 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-gray-700 text-white font-sans min-h-screen flex items-center justify-center p-6"></body>
-    <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-xl space-y-6">
+<body class="bg-gray-700 text-white font-sans min-h-screen flex items-center justify-center p-6">
+    <!-- Box -->
+    <div class="bg-gray-800 rounded-2xl shadow-2xl p-7 w-full max-w-xl space-y-6">
         <h1 class="text-3xl font-bold text-center text-green-400">🌍 Status Server Minecraft</h1>
-        <p class="text-center text-gray-300">Memantau status server Java & Bedrock Edition secara real-time.</p>
+        <!-- <p class="text-center text-gray-300">Memantau status server Java & Bedrock Edition secara real-time.</p> -->
         <h1 class="text-3xl text-center font-mono">
             <span class="text-orange-500">MUTU</span>
             <span class="text-blue-300">SMP</span>
@@ -31,8 +32,10 @@
             <h2 class="text-lg font-semibold text-blue-400">Bedrock Edition :<code>19132</code></h2>
             <p id="bedrock-status" class="mt-2 text-lg">Mengecek...</p>
         </div>
+        <a href="https://discord.gg/cZzbJmjhf3" class="text-blue-400 hover:underline font-bold">Join Discord</a>
     </div>
-    <audio src="/assets/audio/lagu.mp3" preload="auto" autoplay></audio>
+    <!-- Box End -->
+
     <script>
         function updateStatus() {
             fetch('/status')
