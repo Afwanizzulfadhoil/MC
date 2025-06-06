@@ -34,7 +34,7 @@ app.get('/status', async (req, res) => {
         response.java.online = true;
         response.java.version = resultJava.version.name.split(" ")[1];
         response.max_player = resultJava.players.max;
-        response.player_online = resultJava.player_onlinee;
+        response.player_online = resultJava.players.online;
         response.server_name = resultJava.motd.clean;
     } catch (err) {
         console.error('Java status error:', err.message);
