@@ -33,8 +33,8 @@ app.get('/status', async (req, res) => {
         const resultJava = await status(publicIP, 25565, { timeout: 500 });
         response.java.online = true;
         response.java.version = resultJava.version.name.split(" ")[1];
-        response.max_player = players.max;
-        response.player_online = players.online;
+        response.max_player = resultJava.players.max;
+        response.player_online = resultJava.player_onlinee;
         response.server_name = resultJava.motd.clean;
     } catch (err) {
         console.error('Java status error:', err.message);
